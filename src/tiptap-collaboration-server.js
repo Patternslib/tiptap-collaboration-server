@@ -21,6 +21,7 @@ const server = Server.configure({
     },
 
     async onLoadDocument(data) {
+        console.log("ON LOAD");
         // The tiptap collaboration extension uses shared types of a single y-doc
         // to store different fields in the same document.
         // The default field in tiptap is simply called 'default'
