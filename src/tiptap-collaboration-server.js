@@ -13,6 +13,8 @@ const server = Server.configure({
     port: 1234,
 
     async __onChange(data) {
+        // SAVE back the document to plone.restapi - deferred!
+        //
         const prosemirrorJSON = TiptapTransformer.fromYdoc(data.document);
         console.log(JSON.stringify(prosemirrorJSON));
         console.log(
@@ -20,7 +22,9 @@ const server = Server.configure({
         );
     },
 
-    async onLoadDocument(data) {
+    async __onLoadDocument(data) {
+        // LOAD the document from plone.restapi here.
+
         console.log("ON LOAD");
         // The tiptap collaboration extension uses shared types of a single y-doc
         // to store different fields in the same document.
