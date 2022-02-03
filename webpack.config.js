@@ -1,21 +1,28 @@
 process.traceDeprecation = true;
-const path = require("path");
-const patternslib_config = require("@patternslib/patternslib/webpack/webpack.config.js");
 const package_json = require("./package.json");
+const path = require("path");
 
-module.exports = async (env, argv) => {
-    let config = {
+module.exports = (env, argv) => {
+    const config = {
         entry: {
-            "bundle.min": path.resolve(__dirname, "index.js"),
+            bundle: path.resolve(__dirname, "index.js"),
         },
+        output: {
+            filename: "[name].js",
+            chunkFilename: "chunks/[name].[contenthash].min.js",
+            path: path.resolve(__dirname, "dist/"),
+            clean: true,
+            publicPath: "auto",
+        },
+        optimization: {},
     };
-    config = patternslib_config(env, argv, config, [], package_json.dependencies);
-    config.output.path = path.resolve(__dirname, "dist/");
 
     if (process.env.NODE_ENV === "development") {
-        config.devServer.port = "3100";
-        config.devServer.static.directory = __dirname;
+        config.optimization.minimize = false;
+        config.devtool = false;
+        config.watchOptions = {
+            ignored: ["node_modules/**", "docs/**"],
+        };
     }
-
     return config;
 };
