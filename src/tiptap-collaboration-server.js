@@ -50,22 +50,12 @@ const server = Server.configure({
             return;
         }
         const result = await response.text();
-        console.log(result);
 
         const prosemirrorJSON = generateJSON(result, [
             Document.default,
             Paragraph.default,
             Text.default,
         ]);
-        console.log(prosemirrorJSON);
-
-        //const prosemirrorJSON = JSON.parse(
-        //    readFileSync(`/path/to/your/documents/${data.documentName}.json`) || "{}"
-        //);
-
-        //const prosemirrorJSON = JSON.parse(`
-        //{"default":{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"asdasdasd"}]},{"type":"paragraph","content":[{"type":"text","text":"asdasdl"}]},{"type":"paragraph"},{"type":"paragraph"},{"type":"paragraph","content":[{"type":"text","text":"asdasd"}]},{"type":"paragraph"},{"type":"paragraph"},{"type":"paragraph","content":[{"type":"text","text":"asddddsad"}]},{"type":"paragraph"},{"type":"paragraph"}]}}
-        //      `);
 
         // Convert the editor format to a y-doc. The TiptapTransformer requires you to pass the list
         // of extensions you use in the frontend to create a valid document
