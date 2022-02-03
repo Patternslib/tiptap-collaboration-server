@@ -4,7 +4,16 @@
     "description": "A pattern for tiptap-collaboration-server",
     "license": "MIT",
     "main": "./src/tiptap-collaboration-server.js",
-    "dependencies": {},
+    "type": "module",
+    "dependencies": {
+        "@hocuspocus/server": "^1.0.0-alpha.91",
+        "@hocuspocus/transformer": "^1.0.0-alpha.18",
+        "@tiptap/extension-document": "^2.0.0-beta.15",
+        "@tiptap/extension-paragraph": "^2.0.0-beta.23",
+        "@tiptap/extension-text": "^2.0.0-beta.15",
+        "@tiptap/html": "^2.0.0-beta.170",
+        "node-fetch": "^3.2.0"
+    },
     "devDependencies": {
         "@babel/core": "^7.16.0",
         "@babel/eslint-parser": "^7.16.3",
