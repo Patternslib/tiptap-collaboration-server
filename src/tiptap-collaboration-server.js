@@ -7,7 +7,7 @@ parser.addArgument("example-option", [1, 2, 3]);
 
 export default Base.extend({
     name: "tiptap-collaboration-server",
-    trigger: ".pat-tiptap-collaboration-server",
+    trigger: ".tiptap-collaboration-server",
 
     async init() {
         this.options = parser.parse(this.el, this.options);

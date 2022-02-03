@@ -1,4 +1,4 @@
-# pat-tiptap-collaboration-server
+# tiptap-collaboration-server
 
 ## Code style
 

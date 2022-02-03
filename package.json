@@ -1,5 +1,5 @@
 {
-    "name": "@patternslib/pat-tiptap-collaboration-server",
+    "name": "@patternslib/tiptap-collaboration-server",
     "version": "1.0.0",
     "description": "A pattern for tiptap-collaboration-server",
     "license": "MIT",
@@ -62,10 +62,10 @@
         "name": "Syslab GesmbH",
         "email": "dev@syslab.com"
     },
-    "homepage": "https://github.com/patternslib/pat-tiptap-collaboration-server",
+    "homepage": "https://github.com/patternslib/tiptap-collaboration-server",
     "repository": {
         "type": "git",
-        "url": "https://github.com/patternslib/pat-tiptap-collaboration-server.git"
+        "url": "https://github.com/patternslib/tiptap-collaboration-server.git"
     },
     "publishConfig": {
         "access": "public"

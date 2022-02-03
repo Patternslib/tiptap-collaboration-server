@@ -2,14 +2,14 @@ import "regenerator-runtime/runtime"; // needed for ``await`` support
 import Pattern from "./tiptap-collaboration-server";
 import utils from "@patternslib/patternslib/src/core/utils";
 
-describe("pat-tiptap-collaboration-server", () => {
+describe("tiptap-collaboration-server", () => {
     beforeEach(() => {
         document.body.innerHTML = "";
     });
 
     it("is initialized correctly", async () => {
-        document.body.innerHTML = `<div class="pat-tiptap-collaboration-server" />`;
-        const el = document.querySelector(".pat-tiptap-collaboration-server");
+        document.body.innerHTML = `<div class="tiptap-collaboration-server" />`;
+        const el = document.querySelector(".tiptap-collaboration-server");
 
         // Just an example!
         // eslint-disable-next-line no-unused-vars
