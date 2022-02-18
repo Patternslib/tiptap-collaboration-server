@@ -6,11 +6,20 @@ import { TiptapTransformer } from "@hocuspocus/transformer";
 import { readFileSync } from "fs";
 import fetch from "node-fetch";
 import { generateJSON } from "@tiptap/html";
+import jwt from "jwt-simple";
 
 const url = "http://info.cern.ch/hypertext/WWW/TheProject.html";
 
+const ARGS = {};
+if (process.argv.length < 4) {
+    console.warn("Usage: node ./src/tiptap-collaboration-server.js PORT JWT_SECRET");
+    process.exit();
+}
+ARGS.port = process.argv[2];
+ARGS.secret = process.argv[3];
+
 const server = Server.configure({
-    port: 1234,
+    port: ARGS.port,
 
     async __onChange(data) {
         // SAVE back the document to plone.restapi - deferred!
@@ -71,20 +80,20 @@ const server = Server.configure({
         ]);
     },
 
-    async onAuthenticate({ token }) {
-        console.log(token);
-        // Example test if a user is authenticated
-        if (false && token !== "super-secret-token") {
-            throw new Error("Not authorized!");
+    async onAuthenticate({ token, documentName }) {
+        try {
+            const decoded = jwt.decode(token, ARGS.secret);
+            console.log(
+                `Authentification from ${decoded.user} on document ${documentName}.`
+            );
+            return {
+                user: {
+                    name: decoded.user,
+                },
+            };
+        } catch {
+            throw new Error("Authorization failed.");
         }
-
-        // You can set contextual data to use it in other hooks
-        return {
-            user: {
-                id: 1234,
-                name: "John",
-            },
-        };
     },
 });
 
