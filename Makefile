@@ -31,12 +31,6 @@ eslint: stamp-yarn
 check:: stamp-yarn eslint
 	$(YARN) run test
 
-
-.PHONY: bundle
-bundle: stamp-yarn
-	$(YARN) run build
-
-
 # If you want to release on GitHub, make sure to have a .env file with a GITHUB_TOKEN.
 # Also see:
 #	https://github.com/settings/tokens
@@ -64,11 +58,5 @@ release-patch: check
 		npx release-it patch --ci && \
 		npx release-it --github.release --github.update --no-github.draft --no-increment --no-git --no-npm --ci && \
 		git checkout CHANGES.md
-
-
-.PHONY: serve
-serve: stamp-yarn
-	$(YARN) run start
-
 
 #
