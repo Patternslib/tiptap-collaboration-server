@@ -6,14 +6,15 @@
     "main": "./src/tiptap-collaboration-server.js",
     "type": "module",
     "dependencies": {
-        "@hocuspocus/server": "^1.0.0-alpha.91",
-        "@hocuspocus/transformer": "^1.0.0-alpha.18",
-        "@tiptap/extension-document": "^2.0.0-beta.15",
-        "@tiptap/extension-paragraph": "^2.0.0-beta.23",
-        "@tiptap/extension-text": "^2.0.0-beta.15",
-        "@tiptap/html": "^2.0.0-beta.173",
+        "@hocuspocus/server": "^2.5.0",
+        "@hocuspocus/transformer": "^2.5.0",
+        "@tiptap/extension-document": "^2.1.11",
+        "@tiptap/extension-paragraph": "^2.1.11",
+        "@tiptap/extension-text": "^2.1.11",
+        "@tiptap/html": "^2.1.11",
         "jwt-simple": "^0.5.6",
-        "node-fetch": "^3.2.0"
+        "node-fetch": "^3.3.2",
+        "yjs": "^13.6.8"
     },
     "devDependencies": {
         "@commitlint/cli": "^17.7.1",
