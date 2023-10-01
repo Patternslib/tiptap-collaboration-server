@@ -4,10 +4,10 @@
     "description": "A pattern for tiptap-collaboration-server",
     "license": "MIT",
     "main": "./src/tiptap-collaboration-server.js",
-    "type": "module",
     "dependencies": {
         "@hocuspocus/server": "^2.5.0",
         "@hocuspocus/transformer": "^2.5.0",
+        "@patternslib/pat-tiptap": "https://github.com/Patternslib/pat-tiptap.git#scr-1709--collaboration",
         "@tiptap/extension-document": "^2.1.11",
         "@tiptap/extension-paragraph": "^2.1.11",
         "@tiptap/extension-text": "^2.1.11",
