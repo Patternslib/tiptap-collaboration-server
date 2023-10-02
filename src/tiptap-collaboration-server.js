@@ -45,24 +45,26 @@ const server = Server.configure({
     },
 
     async onLoadDocument(data) {
-        debugger;
         let response;
         try {
-            response = await fetch(data.context.user.document_url, {
-                method: "GET",
-                mode: "cors",
-                headers: {
-                    Accept: "application/json",
-                    Authorization: "Bearer " + data.context.user.auth_token,
+            response = await fetch(
+                `${data.context.user.document_url}?metadata_fields=text`,
+                {
+                    method: "GET",
+                    mode: "cors",
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: "Bearer " + data.context.user.auth_token,
+                    },
                 },
-            });
+            );
         } catch (e) {
             throw new Error("Authorization failed.");
         }
         const result = await response.json();
 
         // fetch the Y.js document from somewhere
-        const ydoc = result.data;
+        const ydoc = result.text.data;
 
         return ydoc;
     },
@@ -73,11 +75,7 @@ const server = Server.configure({
             console.log(
                 `Authentification from ${decoded.user} on document ${documentName}.`,
             );
-            // REMOVE
-            console.log(`Authentification token ${decoded.auth_token}.`);
-            console.log(`Document URL ${decoded.document_url}.`);
 
-            debugger;
             let response;
             try {
                 response = await fetch(decoded.document_url, {
@@ -91,7 +89,14 @@ const server = Server.configure({
             } catch (e) {
                 throw new Error("Authorization failed.");
             }
-            const result = await response.json();
+
+            if (response.status !== "200") {
+                throw new Error("Authorization failed.");
+            }
+
+            console.log(
+                `Authenticated user ${decoded.user} on document ${decoded.document_url}.`,
+            );
 
             return {
                 user: {
