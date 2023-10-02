@@ -1,8 +1,9 @@
+import fetch from "node-fetch";
 import jwt from "jwt-simple";
-import tiptap_config from "@patternslib/pat-tiptap/src/config";
+//import tiptap_config from "@patternslib/pat-tiptap/src/config.js";
 import { Server } from "@hocuspocus/server";
 import { TiptapTransformer } from "@hocuspocus/transformer";
-import { debounce } from "debounce";
+//import { debounce } from "debounce";
 
 let debounced;
 
@@ -43,6 +44,29 @@ const server = Server.configure({
         debounced();
     },
 
+    async onLoadDocument(data) {
+        debugger;
+        let response;
+        try {
+            response = await fetch(data.context.user.document_url, {
+                method: "GET",
+                mode: "cors",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: "Bearer " + data.context.user.auth_token,
+                },
+            });
+        } catch (e) {
+            throw new Error("Authorization failed.");
+        }
+        const result = await response.json();
+
+        // fetch the Y.js document from somewhere
+        const ydoc = result.data;
+
+        return ydoc;
+    },
+
     async onAuthenticate({ token, documentName }) {
         try {
             const decoded = jwt.decode(token, ARGS.secret);
@@ -52,6 +76,22 @@ const server = Server.configure({
             // REMOVE
             console.log(`Authentification token ${decoded.auth_token}.`);
             console.log(`Document URL ${decoded.document_url}.`);
+
+            debugger;
+            let response;
+            try {
+                response = await fetch(decoded.document_url, {
+                    method: "GET",
+                    mode: "cors",
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: "Bearer " + decoded.auth_token,
+                    },
+                });
+            } catch (e) {
+                throw new Error("Authorization failed.");
+            }
+            const result = await response.json();
 
             return {
                 user: {
