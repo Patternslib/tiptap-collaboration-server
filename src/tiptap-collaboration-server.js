@@ -3,7 +3,7 @@ import jwt from "jwt-simple";
 //import tiptap_config from "@patternslib/pat-tiptap/src/config.js";
 import { Server } from "@hocuspocus/server";
 import { TiptapTransformer } from "@hocuspocus/transformer";
-import { debounce } from "debounce";
+//import { debounce } from "debounce";
 
 let debounced;
 
@@ -21,6 +21,7 @@ const server = Server.configure({
     async onChange(data) {
         debugger;
         const save = async () => {
+            debugger;
             let response;
             try {
                 response = await fetch(
@@ -41,35 +42,37 @@ const server = Server.configure({
             const result = await response.json();
         };
 
-        debounced?.clear();
-        debounced = debounce(save, 4000);
-        debounced();
+        save();
+
+        //debounced?.clear();
+        //debounced = debounce(save, 4000);
+        //debounced();
     },
 
-    async onLoadDocument(data) {
-        let response;
-        try {
-            response = await fetch(
-                `${data.context.user.document_url}?metadata_fields=text`,
-                {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        Accept: "application/json",
-                        Authorization: "Bearer " + data.context.user.auth_token,
-                    },
-                },
-            );
-        } catch (e) {
-            throw new Error("Authorization failed.");
-        }
-        const result = await response.json();
+    //async onLoadDocument(data) {
+    //    let response;
+    //    try {
+    //        response = await fetch(
+    //            `${data.context.user.document_url}?metadata_fields=text`,
+    //            {
+    //                method: "GET",
+    //                mode: "cors",
+    //                headers: {
+    //                    Accept: "application/json",
+    //                    Authorization: "Bearer " + data.context.user.auth_token,
+    //                },
+    //            },
+    //        );
+    //    } catch (e) {
+    //        throw new Error("Authorization failed.");
+    //    }
+    //    const result = await response.json();
 
-        // fetch the Y.js document from somewhere
-        const ydoc = result.text.data;
+    //    // fetch the Y.js document from somewhere
+    //    const ydoc = result.text.data;
 
-        return ydoc;
-    },
+    //    return ydoc;
+    //},
 
     async onAuthenticate({ token, documentName }) {
         try {
@@ -89,11 +92,11 @@ const server = Server.configure({
                     },
                 });
             } catch (e) {
-                throw new Error("Authorization failed.");
+                throw new Error("Authorization failed. 1");
             }
 
             if (response.status !== "200") {
-                throw new Error("Authorization failed.");
+                throw new Error("Authorization failed. 2");
             }
 
             console.log(
@@ -108,7 +111,7 @@ const server = Server.configure({
                 },
             };
         } catch {
-            throw new Error("Authorization failed.");
+            throw new Error("Authorization failed. 3");
         }
     },
 });
