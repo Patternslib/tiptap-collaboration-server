@@ -80,24 +80,24 @@ const server = Server.configure({
             console.log(
                 `Authentification from ${decoded.user} on document ${documentName}.`,
             );
+            console.log("Decoded token:", decoded);
+            //let response;
+            //try {
+            //    response = await fetch(decoded.document_url, {
+            //        method: "GET",
+            //        mode: "cors",
+            //        headers: {
+            //            Accept: "application/json",
+            //            Authorization: "Bearer " + decoded.auth_token,
+            //        },
+            //    });
+            //} catch (e) {
+            //    throw new Error("Authorization failed. 1");
+            //}
 
-            let response;
-            try {
-                response = await fetch(decoded.document_url, {
-                    method: "GET",
-                    mode: "cors",
-                    headers: {
-                        Accept: "application/json",
-                        Authorization: "Bearer " + decoded.auth_token,
-                    },
-                });
-            } catch (e) {
-                throw new Error("Authorization failed. 1");
-            }
-
-            if (response.status !== "200") {
-                throw new Error("Authorization failed. 2");
-            }
+            //if (response.status !== "200") {
+            //    throw new Error("Authorization failed. 2");
+            //}
 
             console.log(
                 `Authenticated user ${decoded.user} on document ${decoded.document_url}.`,
