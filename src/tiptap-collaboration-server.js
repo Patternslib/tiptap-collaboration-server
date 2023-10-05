@@ -18,36 +18,36 @@ ARGS.secret = process.argv[3];
 const server = Server.configure({
     port: ARGS.port,
 
-    async onChange(data) {
-        debugger;
-        const save = async () => {
-            debugger;
-            let response;
-            try {
-                response = await fetch(
-                    `${data.context.user.document_url}?metadata_fields=text`,
-                    {
-                        method: "PATCH",
-                        mode: "cors",
-                        headers: {
-                            Accept: "application/json",
-                            Authorization: "Bearer " + data.context.user.auth_token,
-                        },
-                        body: data.doc,
-                    },
-                );
-            } catch (e) {
-                throw new Error("Authorization failed.");
-            }
-            const result = await response.json();
-        };
+    //async onChange(data) {
+    //    debugger;
+    //    const save = async () => {
+    //        debugger;
+    //        let response;
+    //        try {
+    //            response = await fetch(
+    //                `${data.context.user.document_url}?metadata_fields=text`,
+    //                {
+    //                    method: "PATCH",
+    //                    mode: "cors",
+    //                    headers: {
+    //                        Accept: "application/json",
+    //                        Authorization: "Bearer " + data.context.user.auth_token,
+    //                    },
+    //                    body: data.doc,
+    //                },
+    //            );
+    //        } catch (e) {
+    //            throw new Error("Authorization failed.");
+    //        }
+    //        const result = await response.json();
+    //    };
 
-        save();
+    //    save();
 
-        //debounced?.clear();
-        //debounced = debounce(save, 4000);
-        //debounced();
-    },
+    //    //debounced?.clear();
+    //    //debounced = debounce(save, 4000);
+    //    //debounced();
+    //},
 
     //async onLoadDocument(data) {
     //    let response;
